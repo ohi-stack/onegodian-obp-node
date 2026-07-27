@@ -1,0 +1,51 @@
+name: OBP-1 Node CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  structure-and-schema:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Verify required repository structure
+        run: |
+          test -d src/api
+          test -d src/registry
+          test -d src/verification
+          test -d src/hashing
+          test -d src/signatures
+          test -d src/records
+          test -d src/audit
+          test -d schemas
+          test -d migrations
+          test -d tests
+          test -d docs
+          test -f schemas/obp-record.schema.json
+          test -f schemas/odin-record.schema.json
+          test -f schemas/revocation.schema.json
+          test -f Dockerfile
+          test -f .env.example
+          test -f SECURITY.md
+          test -f CHANGELOG.md
+
+      - name: Validate JSON schemas are parseable
+        run: |
+          python -m json.tool schemas/obp-record.schema.json > /dev/null
+          python -m json.tool schemas/odin-record.schema.json > /dev/null
+          python -m json.tool schemas/revocation.schema.json > /dev/null
+
+      - name: Prevent committed production secrets
+        run: |
+          if git grep -nE '(BEGIN (RSA |EC |OPENSSH )?PRIVATE KEY|OBP_API_SECRET=.+|OBP_DATABASE_URL=.+)' -- ':!SECURITY.md' ':!.env.example'; then
+            echo 'Potential committed secret detected.'
+            exit 1
+          fi
