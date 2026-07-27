@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://obp1.onegodian.org/schemas/odin-record.schema.json",
+  "title": "ODIN Registry Record",
+  "type": "object",
+  "required": ["odinCode", "title", "category", "status", "recordId", "createdAt"],
+  "properties": {
+    "odinCode": {"type": "string", "pattern": "^ODIN-[A-Z]+[0-9]{4,}$"},
+    "title": {"type": "string", "minLength": 1},
+    "category": {"type": "string", "minLength": 1},
+    "subcategory": {"type": ["string", "null"]},
+    "status": {"enum": ["active", "under-review", "superseded", "revoked", "archived"]},
+    "recordId": {"type": "string", "minLength": 1},
+    "publicUrl": {"type": ["string", "null"], "format": "uri"},
+    "createdAt": {"type": "string", "format": "date-time"},
+    "updatedAt": {"type": ["string", "null"], "format": "date-time"},
+    "metadata": {"type": "object", "additionalProperties": true}
+  },
+  "additionalProperties": false
+}

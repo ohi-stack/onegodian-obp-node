@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://obp1.onegodian.org/schemas/obp-record.schema.json",
+  "title": "OBP-1 Record",
+  "type": "object",
+  "required": ["recordId", "recordType", "title", "status", "contentHash", "hashAlgorithm", "createdAt", "version"],
+  "properties": {
+    "recordId": {"type": "string", "minLength": 1},
+    "recordType": {"type": "string", "minLength": 1},
+    "title": {"type": "string", "minLength": 1},
+    "status": {"enum": ["active", "under-review", "superseded", "revoked", "archived"]},
+    "contentHash": {"type": "string", "minLength": 16},
+    "hashAlgorithm": {"enum": ["sha256", "sha384", "sha512"]},
+    "canonicalizationVersion": {"type": "string"},
+    "odinCode": {"type": ["string", "null"]},
+    "issuer": {"type": ["string", "null"]},
+    "createdAt": {"type": "string", "format": "date-time"},
+    "updatedAt": {"type": ["string", "null"], "format": "date-time"},
+    "version": {"type": "string", "minLength": 1},
+    "supersedes": {"type": ["string", "null"]},
+    "revocation": {"type": ["object", "null"]},
+    "metadata": {"type": "object", "additionalProperties": true}
+  },
+  "additionalProperties": false
+}

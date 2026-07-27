@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://obp1.onegodian.org/schemas/revocation.schema.json",
+  "title": "OBP-1 Revocation Record",
+  "type": "object",
+  "required": ["revocationId", "recordId", "reason", "revokedAt", "revokedBy"],
+  "properties": {
+    "revocationId": {"type": "string", "minLength": 1},
+    "recordId": {"type": "string", "minLength": 1},
+    "reason": {"type": "string", "minLength": 1},
+    "revokedAt": {"type": "string", "format": "date-time"},
+    "revokedBy": {"type": "string", "minLength": 1},
+    "replacementRecordId": {"type": ["string", "null"]},
+    "signature": {"type": ["string", "null"]},
+    "signatureAlgorithm": {"type": ["string", "null"]},
+    "metadata": {"type": "object", "additionalProperties": true}
+  },
+  "additionalProperties": false
+}
