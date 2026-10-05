@@ -59,7 +59,6 @@ function publicRecord(record: ReturnType<Obp1Store['getRecord']>) {
     recordId: record.recordId,
     recordType: record.recordType,
     title: record.title,
-    owner: record.owner,
     source: record.source,
     odinId: record.odinId,
     version: record.version,
@@ -68,9 +67,7 @@ function publicRecord(record: ReturnType<Obp1Store['getRecord']>) {
     status: record.status,
     createdAt: record.createdAt,
     verifiedAt: record.verifiedAt,
-    verifiedBy: record.verifiedBy,
     revokedAt: record.revokedAt,
-    revocationReason: record.revocationReason,
     supersededAt: record.supersededAt,
     supersededBy: record.supersededBy
   };
