@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Search, ShieldCheck, AlertTriangle } from 'lucide-react';
 
 function locatorFor(value: string) {
