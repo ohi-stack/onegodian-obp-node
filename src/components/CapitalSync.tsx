@@ -1,4 +1,3 @@
-import React from 'react';
 import { RefreshCw, Lock } from 'lucide-react';
 
 export default function CapitalSync() {
